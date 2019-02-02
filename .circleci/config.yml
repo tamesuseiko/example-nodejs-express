@@ -27,4 +27,16 @@ jobs:
             docker build -t tamesuseiko/ci:${CIRCLE_SHA1} .
             docker push tamesuseiko/ci:latest
             docker push tamesuseiko/ci:${CIRCLE_SHA1}
+      - run:
+           name: "Call Rancher"
+           command: |
+             docker run --rm -it \
+               -e CATTLE_ACCESS_KEY="$CATTLE_ACCESS_KEY" \
+               -e CATTLE_SECRET_KEY="$CATTLE_SECRET_KEY" \
+               -e CATTLE_URL="$CATTLE_URL" \
+               etlweather/gaucho upgrade 1s33 \
+               --imageUuid 'docker:tamesuseiko/ci:latest' \
+               --batch_size 3 --start_first \
+               --auto_complete --timeout 600 \
+               /
       - run: echo Done
