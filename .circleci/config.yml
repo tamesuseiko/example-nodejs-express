@@ -23,8 +23,8 @@ jobs:
           name: "Build ja"
           command: |
             cp Dockerfile.production Dockerfile
-            docker build -t tamesuseiko/ci:latest
-            docker built -t tamesuseiko/ci:${CIRCLE_SHA1}
+            docker build -t tamesuseiko/ci:latest .
+            docker built -t tamesuseiko/ci:${CIRCLE_SHA1} .
             docker push tamesuseiko/ci:latest
             docker push tamesuseiko/ci:${CIRCLE_SHA1}
       - run: echo Done
