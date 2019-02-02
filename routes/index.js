@@ -26,6 +26,12 @@ router.get('/', function (req, res, next) {
   })
 });
 
+router.get('/helloworld', function (req, res, next) {
+  res.status(200).json({
+    message: "hello world"
+  })
+});
+
 
 router.get("/plus/:a/:b", function (req, res, next) {
   const {
